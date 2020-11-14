@@ -12,6 +12,9 @@ using namespace std;
 class Messages {
 
 public:
+    /*
+    * @Description Goes fullscreen and prints logo, waits until the user press enter.
+    */
     void PrintLogo() {
         ::SendMessage(::GetConsoleWindow(), WM_SYSKEYDOWN, VK_RETURN, 0x20000000);
 
@@ -53,6 +56,11 @@ public:
         cin.ignore();
     }
 
+    /*
+    * @Description Prints the intro message 
+    * @Params:
+    *       bomb - The bomb to work with
+    */
     static void PrintIntroMessage(Bomb bomb) {
         SlowPrint("Hi, "+ GetUser() + " this is Lt. Lisa Smith. We have a level " + to_string(bomb.getDifficulty()) + " situation...");
         NewLine();
@@ -64,6 +72,11 @@ public:
         NewLine();
     }
 
+    /*
+    * @Description Prints new random phrase
+    * @Params:
+    *       difficulty - The difficulty of the new level
+    */
     void PrintNextLevelMessage(int Difficulty) {
         string NewPhraseLevel = ReturnNewNextLevelPhrase();       
 
@@ -73,6 +86,11 @@ public:
         NewLine();        
     }
 
+    /*
+    * @Description Prints new random descriptions
+    * @Params:
+    *       bomb - The bomb to work with
+    */
     void PrintDescription(Bomb bomb) {
         vector<int> BombCodes = bomb.getResultCodes();
 
@@ -115,6 +133,13 @@ public:
         }
     }
 
+    /*
+    * @Description Ask for codes, with randomized phrases 
+    * @Params:
+    *       numberOfCodesToAsk - The number of codes to ask for
+    * @Return 
+    *       UserGuesses - The user guesses of the codes to compare
+    */
     vector<int> AskForCodes(int numberOfCodesToAsk) {
        string TryingPhrase;
        vector<int> UsersGuesses;
@@ -157,7 +182,11 @@ public:
        }
         return UsersGuesses;       
     }
-
+    /*
+    * @Description Slow print function
+    * @Params:
+    *       StringToPrint - The string that will be printed
+    */
     static void SlowPrint(string StringToPrint) {
         cout << setw(30);
         for (char ch : StringToPrint) {
@@ -165,7 +194,9 @@ public:
             Sleep(SlowSleep);
         }
     }
-
+    /*
+    * @Description Inserts new line
+    */
     static void NewLine() {
         cout << endl;
     }
@@ -197,14 +228,22 @@ private:
         "Is a little bit blurry the {0} one. But I think I can read it... is... ",
         "The {0} was hiding, but nothing can escape of my sight. Ths is... "
     };
-
+    /*
+    * @Description Randomize the Trying Phrases
+    * @Return:
+    *       The phrase in the first index.
+    */
     string ReturnNewTryingPhrase() {
         unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
 
         shuffle(TryingMessages.begin(), TryingMessages.end(), std::default_random_engine(seed));
         return TryingMessages[0];
     }
-
+    /*
+    * @Description Randomize the Next Level phrases
+    * @Return:
+    *       The phrase in the first index.
+    */
     string ReturnNewNextLevelPhrase() {
         unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
 
@@ -212,6 +251,11 @@ private:
         return NextLevelIntroMsgs[0];
     }
 
+    /*
+    * @Description Randomize the description phrases
+    * @Return:
+    *       The phrase in the first index.
+    */
     string ReturnNewDescriptionPhrase() {
         unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
 
@@ -220,7 +264,11 @@ private:
     }
 
     
-
+    /*
+    * @Description Gets the windows user
+    * @Return:
+    *       usenS - The username stringified.
+    */
     static string GetUser() {
         TCHAR username[UNLEN + 1];
         DWORD username_len = UNLEN + 1;

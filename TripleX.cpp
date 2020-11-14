@@ -11,7 +11,9 @@
 using namespace std;
 
 
-
+/*
+* @Description Plays the game.
+*/
 bool PlayGame(Bomb bomba)
 {   
     Messages msg;
@@ -39,7 +41,9 @@ bool PlayGame(Bomb bomba)
     }
     return CheckCode;    
 }
-
+/*
+* @Description The main function @see main
+*/
 int main()
 {   
     Bomb bomba = Bomb();

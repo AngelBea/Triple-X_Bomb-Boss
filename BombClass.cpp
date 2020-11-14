@@ -20,6 +20,9 @@ class Bomb {
 		vector<int> getResultCodes() { return ResultCodes; };
 		int getDifficulty() { return Difficulty; };
 
+		/*
+		* @Description Calculates the codes randomized by a seed of the time by the index wire
+		*/
 		void calculateCodes() {
 			Codes.clear();
 			ResultCodes.clear();
@@ -34,7 +37,13 @@ class Bomb {
 				ResultCodes.push_back(RandomNumber * RandomNumber);				
 			}
 		}
-
+		/*
+		* @Description Check if the user guess is correct.
+		* @Params: 
+		*		UserGuess - The user guessed codes.
+		* @Return:
+		*		If the user guess is correct returns true, if not returns false.
+		*/
 		bool CheckCode(vector<int> UserGuess) {
 			for (int i = 0; i < UserGuess.size(); i++) {
 				if (UserGuess[i] != Codes[i]) {
